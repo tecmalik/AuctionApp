@@ -1,11 +1,13 @@
 package org.calltoauction.data.models;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 
 @Data
+@NoArgsConstructor
 public class User {
 
 
