@@ -6,11 +6,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
+@Document(collection = "lots")
 @Data
 @NoArgsConstructor
 public class Lot {
-    @DBRef
-    private long id;
+    @Id
+    private String id;
+    private String userID;
     private String name;
     private String description;
+
 }
