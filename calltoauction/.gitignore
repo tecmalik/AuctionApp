@@ -11,7 +11,7 @@ target/
 *.iws
 *.iml
 *.ipr
-.idea
+
 ### Eclipse ###
 .apt_generated
 .classpath
@@ -36,8 +36,9 @@ build/
 
 ### Mac OS ###
 .DS_Store
-# Created by https://www.toptal.com/developers/gitignore/api/intellij+all,maven
-# Edit at https://www.toptal.com/developers/gitignore?templates=intellij+all,maven
+
+# Created by https://www.toptal.com/developers/gitignore/api/maven,intellij+all
+# Edit at https://www.toptal.com/developers/gitignore?templates=maven,intellij+all
 
 ### Intellij+all ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -123,6 +124,7 @@ fabric.properties
 # that are supposed to be shared within teams.
 
 .idea/*
+.idea
 
 !.idea/codeStyles
 !.idea/runConfigurations
@@ -146,4 +148,4 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-# End of https://www.toptal.com/developers/gitignore/api/intellij+all,maven
+# End of https://www.toptal.com/developers/gitignore/api/maven,intellij+all
