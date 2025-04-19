@@ -19,5 +19,6 @@ public class Lot {
     private User consignor;
     private String name;
     private String description;
+    private String imageUrl;
 
 }

@@ -21,5 +21,6 @@ public class User {
  private String phone;
  private String dateOfBirth;
  private Address address;
+ private Role Role;
 
 }
