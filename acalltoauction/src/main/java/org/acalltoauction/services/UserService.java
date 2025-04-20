@@ -1,8 +1,8 @@
 package org.acalltoauction.services;
 
 import org.acalltoauction.dto.requests.UserSignUpRequest;
-import org.acalltoauction.dto.response.UserSignupResponse;
+import org.acalltoauction.dto.response.UserSignUpResponse;
 
 public interface UserService {
-    UserSignupResponse signUp(UserSignUpRequest userSignUpRequest);
+    UserSignUpResponse signUp(UserSignUpRequest userSignUpRequest);
 }

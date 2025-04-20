@@ -1,6 +1,8 @@
 package org.acalltoauction.services;
 
+import org.acalltoauction.data.repository.UserRepository;
 import org.acalltoauction.dto.requests.UserSignUpRequest;
+import org.acalltoauction.dto.response.UserSignUpResponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,14 +13,20 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import de.flapdoodle.embed.
 
 
-import java.io.IOException;
 
+import java.io.IOException;
+import java.lang.classfile.instruction.InvokeInstruction;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.*;
 @DataMongoTest
 @SpringBootTest
 class UserServiceImplTest {
     @Autowired
     private UserService userService;
+    @Autowired
+    UserRepository userRepository;
     @Autowired
     private MongoTemplate mongoTemplate;
     private MongodExecutable mongodExecutable;
@@ -41,9 +49,13 @@ class UserServiceImplTest {
         userRequest.setEmail("test@acalltoauction.com");
         userRequest.setPassword("password");
         userRequest.setNin("nin");
-        userService.signUp(userRequest);
+        UserSignUpResponse response = userService.signUp(userRequest);
+        assertEquals(1,userRepository.count());
+        assertThat(response,notNullValue());
 
-
+    }
+    @Test
+    public void UserCanSignInTest(){
 
     }
 
