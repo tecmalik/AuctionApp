@@ -3,4 +3,26 @@
     padding:0;
     box-sizing: border-box;
 }
+.mainWrapper{
+    color:#E6F3F6;
+    margin: 25px 25px;
+}
+.logo{
+    display: flex;
+}
+.logo #callLogo{
+    padding-right : 400px;
+}
+.navBar{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.navLink ul {
+    list-style: none;
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+
+}
 
