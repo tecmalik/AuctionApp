@@ -1,26 +1,29 @@
 package org.acalltoauction.services;
 
-import de.flapdoodle.embed.mongo.distribution.Version;
-import de.flapdoodle.embed.mongo.transitions.MongodStarter;
 import org.acalltoauction.dto.requests.UserSignUpRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import de.flapdoodle.embed.
+
 
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
+@DataMongoTest
 @SpringBootTest
 class UserServiceImplTest {
     @Autowired
     private UserService userService;
+    @Autowired
+    private MongoTemplate mongoTemplate;
     private MongodExecutable mongodExecutable;
-    private MongodClient mongodClient;
+
+
     @BeforeEach
     void setUp() throws IOException {
 
@@ -29,7 +32,7 @@ class UserServiceImplTest {
 
     @AfterEach
     void tearDown() {
-        mongodExecutable.stop();
+        mongoTemplate.
     }
 
     @Test
