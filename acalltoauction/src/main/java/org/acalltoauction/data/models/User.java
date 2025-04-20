@@ -18,6 +18,7 @@ public class User {
     private String lastname;
     private String email;
     private String phone;
+    private String nin;
     private String dateOfBirth;
     private Address address;
     private Role Role;
