@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class UserServiceImplTest {
     @Test
     public void A_UserCanRegisterTest() {
-        UserSignUpRequest userRequest = new UserSignUpRequest( );
+        UserSignUpRequest userRequestDto = new UserSignUpRequest( );
 
 
     }

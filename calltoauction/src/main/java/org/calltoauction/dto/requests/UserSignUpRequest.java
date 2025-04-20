@@ -1,12 +1,10 @@
-package org.calltoauction.dto.requestdto;
-
+package org.calltoauction.dto.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
+@Data
 public class UserSignUpRequest {
     private String username;
     private String email;
