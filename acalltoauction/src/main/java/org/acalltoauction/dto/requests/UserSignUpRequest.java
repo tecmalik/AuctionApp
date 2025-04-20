@@ -1,4 +1,4 @@
-package org.calltoauction.dto.requests;
+package org.acalltoauction.dto.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
