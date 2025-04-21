@@ -5,24 +5,49 @@
 }
 .mainWrapper{
     color:#E6F3F6;
-    margin: 25px 25px;
+    margin: 0px 35px;
 }
 .logo{
-    display: flex;
+    height: 10px;
 }
-.logo #callLogo{
-    padding-right : 400px;
-}
+
 .navBar{
     display: flex;
     justify-content: space-between;
+    
+    
     
 }
 .navLink ul {
     list-style: none;
     display: flex;
-    width: 500px;
+    width: 600px;
     justify-content: space-between;
+    padding-top: 100px;
+    padding-right:100px
+    
+}
+.line p {
+    padding-left :200px;
+    padding-bottom: 300px;
+
+}
+.navlink{
+    height:12px;
+}
+.buttons{
+    
+    padding-top:80px;
+    width: 100px;
+}
+.buttons #loginButton{
+    background-color : #6FC5DA;
+    color: #ffffff;
+    border-radius: 2px;
+    border : none;
+    height:40px;
+    width: 100px;
+    box-shadow: 26px 26px;
 
 }
 
