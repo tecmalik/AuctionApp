@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+.mainWrapper{
+    color:#86a2a9;
+    margin: 0px 35px;
+}
+.logo{
+    height: 10px;
+}

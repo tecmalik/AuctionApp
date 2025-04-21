@@ -4,8 +4,12 @@
     box-sizing: border-box;
 }
 .mainWrapper{
-    color:#F0F0F0;
+    background-color:#F0F0F0;
     margin: 0px 35px;
+    width: 1434px;
+    margin-left: 200px;
+    
+
 }
 .logo{
     height: 10px;
@@ -14,8 +18,9 @@
 .navBar{
     display: flex;
     justify-content: space-between;
-    
-    
+    width: 1300px;
+    padding-left: 40px;
+
     
 }
 .navLink ul {
@@ -27,10 +32,10 @@
     padding-right:100px
     
 }
-.line p {
+/* .line p {
     padding-left :200px;
 
-}
+} */
 .navlink{
     height:12px;
 }
@@ -59,8 +64,8 @@
     padding-top: 30px;
 }
 .welcomeText p:hover {
-    /* width: 300px; */
-    transition: width 2s, height 4s;
+    position:sticky;
+    color:#F0F0F0 ;
   }
 .heroimage{
     display: flex;
@@ -70,6 +75,9 @@
 .logoImage #logo{
    filter: blur(2px)
 }
+.logoImage{
+background-color: #ffffff;
+}
 .centerdText h3 ,h1 {
     text-align: center;
     color: black;
@@ -78,6 +86,25 @@
     top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+#signUpButton{
+    background-color: #42AA7B;
+    border: none;
+    color: #ffffff;
+    width: 120px;
+    height: 35px;
+    border-radius: 3px;
+
+}
+.logoImage p{
+    text-align: center;
+    padding-bottom: 20px;
+}
+.storyText{
+    color:black;
+    text-align: center;
+    padding-top:40px;
+
 }
 
 
