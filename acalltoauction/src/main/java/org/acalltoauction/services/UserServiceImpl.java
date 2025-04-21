@@ -1,6 +1,7 @@
 package org.acalltoauction.services;
 
 import org.acalltoauction.data.models.User;
+import org.acalltoauction.data.repositories.UserRepository;
 import org.acalltoauction.dto.requests.UserSignUpRequest;
 import org.acalltoauction.dto.response.UserSignUpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
