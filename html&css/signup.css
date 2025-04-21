@@ -4,9 +4,29 @@
     box-sizing: border-box;
 }
 .mainWrapper{
-    color:#86a2a9;
+    background-color:#E6F3F6;
     margin: 0px 35px;
+    width: 1434px;
+    margin-left: 200px;
+    height : 1499px;
+
 }
 .logo{
-    height: 10px;
+    height: 355px;;
+    width: 195px;
+    padding-top: 20px;
+}
+.signupText h1{
+    text-align: center;
+    font-size :70px;
+}
+.content{
+    display:flex;
+}
+.board{
+    background-color:#ffffff ;
+    border-radius: 20px;
+    height: 764px;
+    width:666px ;
+
 }
