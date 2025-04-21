@@ -1,8 +1,10 @@
 package org.acalltoauction.services;
 
 import org.acalltoauction.data.repositories.UserRepository;
+import org.acalltoauction.dto.requests.UserDeleteRequest;
 import org.acalltoauction.dto.requests.UserLoginRequest;
 import org.acalltoauction.dto.requests.UserSignUpRequest;
+import org.acalltoauction.dto.response.UserDeleteResponse;
 import org.acalltoauction.dto.response.UserLoginResponse;
 import org.acalltoauction.dto.response.UserSignUpResponse;
 import org.junit.jupiter.api.Test;
@@ -49,6 +51,18 @@ class UserServiceImplTest {
         userLoginRequest.setPassword("password");
         UserLoginResponse userLoginResponse = userServiceImpl.login(userLoginRequest);
         assertThat(userLoginResponse,notNullValue());
+        UserDeleteRequest userDeleteRequest = new UserDeleteRequest();
+        UserDeleteResponse userDeleteResponse = userServiceImpl.deleteUser(userDeleteRequest);
+        assertThat(userDeleteResponse,notNullValue());
+    }
+    @Test
+    public void DuplicateUserCanNotBeCreated(){
+        UserSignUpRequest userRequest = new UserSignUpRequest();
+        userRequest.setEmail("test@acalltoauction.com");
+        userRequest.setPassword("password");
+        userRequest.setNin("12345672345");
+        UserSignUpResponse response = userServiceImpl.signUp(userRequest);
+        assertThat(response,notNullValue());
 
     }
 
