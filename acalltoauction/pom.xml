@@ -22,17 +22,17 @@
             <version>1.18.38</version>
             <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb -->
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-mongodb</artifactId>
-            <version>4.4.4</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <version>3.4.4</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.4.3</version>
+            <version>3.4.4</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
         <dependency>
@@ -51,14 +51,8 @@
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.mongo</artifactId>
-            <version>3.3.0</version>
+            <version>3.4.4</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
         </dependency>
 
     </dependencies>

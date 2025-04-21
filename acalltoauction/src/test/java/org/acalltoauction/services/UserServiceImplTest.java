@@ -1,6 +1,5 @@
 package org.acalltoauction.services;
 
-import org.acalltoauction.data.repository.UserRepository;
 import org.acalltoauction.dto.requests.UserSignUpRequest;
 import org.acalltoauction.dto.response.UserSignUpResponse;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class UserServiceImplTest {
