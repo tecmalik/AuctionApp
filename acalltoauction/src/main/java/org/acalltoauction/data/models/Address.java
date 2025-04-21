@@ -1,12 +1,11 @@
 package org.acalltoauction.data.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Address {
     private String street;
