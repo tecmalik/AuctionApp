@@ -17,11 +17,17 @@
     padding-top: 20px;
 }
 .signupText h1{
-    text-align: center;
+    text-align: right;
     font-size :70px;
+    padding-right : 350px;
+    padding-bottom: 10px;
 }
 .content{
     display:flex;
+    gap: 40px;
+    padding-left: 78px;
+    /* justify-content: space-between; */
+    
 }
 .board{
     background-color:#ffffff ;
@@ -29,4 +35,13 @@
     height: 764px;
     width:666px ;
 
+}
+.text h2{
+    text-align:center;
+    padding-top:20px;
+}
+.imageAndText p {
+    filter: blur(1px);
+    padding-top: 40px;
+    
 }
