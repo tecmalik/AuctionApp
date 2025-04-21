@@ -47,9 +47,8 @@ class UserServiceImplTest {
         UserLoginRequest userLoginRequest = new UserLoginRequest();
         userLoginRequest.setEmail("test@acalltoauction.com");
         userLoginRequest.setPassword("password");
-        UserLoginResponse userLoginResponse =userServiceImpl.login(userLoginRequest);
-
-
+        UserLoginResponse userLoginResponse = userServiceImpl.login(userLoginRequest);
+        assertThat(userLoginResponse,notNullValue());
 
     }
 
