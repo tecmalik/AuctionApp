@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 .mainWrapper{
-    color:#E6F3F6;
+    color:#F0F0F0;
     margin: 0px 35px;
 }
 .logo{
@@ -29,7 +29,6 @@
 }
 .line p {
     padding-left :200px;
-    padding-bottom: 300px;
 
 }
 .navlink{
@@ -47,7 +46,39 @@
     border : none;
     height:40px;
     width: 100px;
-    box-shadow: 26px 26px;
 
 }
+.welcomeText h5{
+    text-align: center;
+    color: black;
+    font-size:65px;
+}
+.welcomeText p{
+    text-align: center;
+    size: 10px;
+    padding-top: 30px;
+}
+.welcomeText p:hover {
+    /* width: 300px; */
+    transition: width 2s, height 4s;
+  }
+.heroimage{
+    display: flex;
+    justify-content: center;
+    padding-top :40px;
+}
+.logoImage #logo{
+   filter: blur(2px)
+}
+.centerdText h3 ,h1 {
+    text-align: center;
+    color: black;
+    font: 400;
+    position: relative;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
 
