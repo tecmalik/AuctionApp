@@ -1,5 +1,6 @@
 package org.acalltoauction.services;
 
+import org.acalltoauction.data.models.Lot;
 import org.acalltoauction.data.models.User;
 import org.acalltoauction.data.repositories.UserRepository;
 import org.acalltoauction.dto.requests.UserDeleteRequest;
@@ -8,7 +9,9 @@ import org.acalltoauction.dto.requests.UserSignUpRequest;
 import org.acalltoauction.dto.response.UserDeleteResponse;
 import org.acalltoauction.dto.response.UserLoginResponse;
 import org.acalltoauction.dto.response.UserSignUpResponse;
+import org.acalltoauction.exceptions.InvalidCredentials;
 import org.acalltoauction.exceptions.InvalidUserException;
+import org.acalltoauction.exceptions.UserAlreadyExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserSignUpResponse signUp(UserSignUpRequest userSignUpRequest) {
+        validateUserSignupRequest(userSignUpRequest);
+        validateUserExistence(userSignUpRequest);
         User user = new User();
         user.setEmail(userSignUpRequest.getEmail());
         user.setPassword(userSignUpRequest.getPassword());
@@ -29,57 +34,65 @@ public class UserServiceImpl implements UserService {
         return userSignupResponse;
     }
 
+    private void validateUserSignupRequest(UserSignUpRequest userSignUpRequest) {
+        if (userSignUpRequest.getEmail() == null || userSignUpRequest.getEmail().trim().isEmpty()) throw new NullPointerException("Email is required");
+        if (userSignUpRequest.getPassword() == null || userSignUpRequest.getPassword().trim().isEmpty()) throw new NullPointerException("Password is required");
+        if (userSignUpRequest.getNin() == null || userSignUpRequest.getNin().trim().isEmpty()) throw new NullPointerException("Nin is required");
+    }
+
+    private void validateUserExistence(UserSignUpRequest userSignUpRequest) {
+        if (userRepository.findByEmail(userSignUpRequest.getEmail()) != null)throw new UserAlreadyExistException("Email already exists");
+    }
+
     @Override
     public UserLoginResponse login(UserLoginRequest userLoginRequest) {
         validateUserLoginRequest(userLoginRequest);
         User user = userRepository.findByEmail(userLoginRequest.getEmail());
         validateUser(user);
+        validateUserPassword(userLoginRequest , user);
         UserLoginResponse userLoginResponse = new UserLoginResponse();
         userLoginResponse.setMessage("Login Successful");
         return userLoginResponse;
     }
 
+    private void validateUserPassword(UserLoginRequest userLoginRequest, User user) {
+        if (!user.getPassword().equals(userLoginRequest.getPassword())) throw new InvalidCredentials("invalid Credentials");
+    }
+
     @Override
     public UserDeleteResponse deleteUser(UserDeleteRequest userDeleteRequest) {
         validateUserDeleteRequest(userDeleteRequest);
-        return null;
+        User user = userRepository.findByEmail(userDeleteRequest.getEmail());
+        validateUser(user);
+        userRepository.delete(user);
+        UserDeleteResponse userDeleteResponse = new UserDeleteResponse();
+        userDeleteResponse.setMessage("Delete Successful");
+        return userDeleteResponse;
+    }
+
+    @Override
+    public void createLot() {
+        Lot lot = new Lot();
+
     }
 
     private void validateUserDeleteRequest(UserDeleteRequest userDeleteRequest) {
-        if (userDeleteRequest.getEmail() == null) {
-            throw new NullPointerException("Email is required");
-        }
-        if (userDeleteRequest.password == null) {
-            throw new NullPointerException("Password is required");
-        }
-        if (userDeleteRequest.getEmail().trim().isEmpty()){
-            throw new NullPointerException("Email is required");
-        }
-        if (userDeleteRequest.password.trim().isEmpty()) {
-            throw new NullPointerException("Password is required");
-        }
+        if (userDeleteRequest.getEmail() == null) throw new NullPointerException("Email is required");
+        if (userDeleteRequest.password == null) throw new NullPointerException("Password is required");
+        if (userDeleteRequest.getEmail().trim().isEmpty())throw new NullPointerException("Email is required");
+        if (userDeleteRequest.password.trim().isEmpty())throw new NullPointerException("Password is required");
     }
 
     private void validateUserLoginRequest(UserLoginRequest userLoginRequest) {
-        if (userLoginRequest.getEmail() == null) {
-            throw new NullPointerException("Email is required");
-        }
-        if (userLoginRequest.getPassword() == null) {
-            throw new NullPointerException("Password is required");
-        }
-        if (userLoginRequest.getEmail().trim().isEmpty()) {
-            throw new NullPointerException("Email is required");
-        }
-        if (userLoginRequest.getPassword().trim().isEmpty() ){
-            throw new NullPointerException("Password is required");
-        }
+        if (userLoginRequest.getEmail() == null) throw new NullPointerException("Email is required");
+        if (userLoginRequest.getPassword() == null)throw new NullPointerException("Password is required");
+        if (userLoginRequest.getEmail().trim().isEmpty())throw new NullPointerException("Email is required");
+        if (userLoginRequest.getPassword().trim().isEmpty() )throw new NullPointerException("Password is required");
+
     }
 
     private void validateUser(User user) {
-        if (userRepository.findByEmail(user.getEmail()) == null) {
-            throw new InvalidUserException("User Does Not Exist");
-        }
-
+        if (userRepository.findByEmail(user.getEmail()) == null)throw new InvalidUserException("User Does Not Exist");
     }
 
 }

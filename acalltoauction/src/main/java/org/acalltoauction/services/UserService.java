@@ -10,5 +10,6 @@ public interface UserService {
     UserSignUpResponse signUp(UserSignUpRequest userSignUpRequest);
     UserLoginResponse login(UserLoginRequest userLoginRequest);
     UserDeleteResponse deleteUser(UserDeleteRequest userDeleteRequest);
+    void createLot();
 }
 
