@@ -46,6 +46,18 @@
     padding-top: 20px;
 }
 .board #box{
-    size: 200px;
-    
+    height : 50px;
+    width : 504px;
+    border-radius:10px;
+    font-size: larger;
+    border : none;
 }
+.board #submit{
+    height : 40px;
+    width : 115px;
+    background-color:#42AA7B;
+    border-radius: 12px;
+    border: none
+
+}
+

@@ -46,3 +46,10 @@
     filter: blur(1px);
     padding-top: 40px;   
 }
+
+.board #submit{
+    height : 40px;
+    width : 115px;
+    background-color:#42AA7B;
+    
+}
