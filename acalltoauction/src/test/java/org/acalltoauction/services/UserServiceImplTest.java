@@ -1,6 +1,8 @@
 package org.acalltoauction.services;
 
+import org.acalltoauction.data.models.Lot;
 import org.acalltoauction.data.repositories.UserRepository;
+import org.acalltoauction.dto.requests.LotCreationRequest;
 import org.acalltoauction.dto.requests.UserDeleteRequest;
 import org.acalltoauction.dto.requests.UserLoginRequest;
 import org.acalltoauction.dto.requests.UserSignUpRequest;
@@ -137,7 +139,10 @@ class UserServiceImplTest {
         userRequest.setNin("12345672345");
         UserSignUpResponse response = userServiceImpl.signUp(userRequest);
         assertThat(response,notNullValue());
-        userService.createLot();
+        LotCreationRequest lot = new LotCreationRequest();
+
+        userService.createLot(lot);
+
 
     };
 

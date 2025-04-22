@@ -17,7 +17,7 @@ public class Lot {
     private String id;
     @DBRef
     private User consignor;
-    private String name;
+    private String lotName;
     private String description;
     private String imageUrl;
     private LotStatus lotStatus;
