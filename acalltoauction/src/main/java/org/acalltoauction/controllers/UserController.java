@@ -1,7 +1,6 @@
 package org.acalltoauction.controllers;
 
 import jakarta.validation.Valid;
-import org.acalltoauction.data.models.User;
 import org.acalltoauction.dto.requests.UserDeleteRequest;
 import org.acalltoauction.dto.requests.UserLoginRequest;
 import org.acalltoauction.dto.requests.UserSignUpRequest;
@@ -41,7 +40,7 @@ public class UserController {
         }
     }
     @DeleteMapping("/delete/{userEmail}")
-    public ResponseEntity<?> delete(@PathVariable UserDeleteRequest userDeleteRequest){
+    public ResponseEntity<?> deleteUser(@RequestBody UserDeleteRequest userDeleteRequest){
         try {
             UserDeleteResponse userDeleteResponse = userService.deleteUser(userDeleteRequest);
             return new ResponseEntity<>(new ApiResponse(true, userDeleteResponse), HttpStatus.OK);
@@ -49,5 +48,8 @@ public class UserController {
             return new ResponseEntity<>(new ApiResponse(false , exception.getMessage()),HttpStatus.BAD_REQUEST);
         }
     }
+
+
+
 
 }

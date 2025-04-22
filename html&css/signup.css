@@ -34,14 +34,15 @@
     border-radius: 20px;
     height: 764px;
     width:666px ;
-
+    justify-content: center;
+    justify-items: center;
 }
+
 .text h2{
     text-align:center;
     padding-top:20px;
 }
 .imageAndText p {
     filter: blur(1px);
-    padding-top: 40px;
-    
+    padding-top: 40px;   
 }

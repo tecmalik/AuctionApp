@@ -33,7 +33,8 @@
     border-radius: 20px;
     height: 335px;
     width:597px ;
-
+    justify-content: center;
+    justify-items: center;
 
 }
 .text h2{
@@ -43,5 +44,8 @@
 .imageAndText p {
     /* filter: blur(1px); */
     padding-top: 20px;
+}
+.board #box{
+    size: 200px;
     
 }
