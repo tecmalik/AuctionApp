@@ -39,12 +39,11 @@
 .navlink{
     height:12px;
 }
-.buttons{
-    
+.button{
     padding-top:80px;
     width: 100px;
 }
-.buttons #loginButton{
+.button #login{
     background-color : #6FC5DA;
     color: #ffffff;
     border-radius: 2px;
@@ -105,6 +104,9 @@ background-color: #ffffff;
     text-align: center;
     padding-top:40px;
 
+}
+.wrap{
+    background-color :rgb(38, 37, 37) ;
 }
 
 

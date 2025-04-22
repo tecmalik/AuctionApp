@@ -36,6 +36,7 @@
     width:666px ;
     justify-content: center;
     justify-items: center;
+    padding-top: 50px;
 }
 
 .text h2{
@@ -47,9 +48,27 @@
     padding-top: 40px;   
 }
 
+.board #box{
+    height : 50px;
+    width : 504px;
+    border-radius:10px;
+    font-size: larger;
+    text-align: center;
+    border-color:#D9D9D9 ;
+    
+}
 .board #submit{
     height : 40px;
     width : 115px;
     background-color:#42AA7B;
-    
+    border-radius: 12px;
+    color :#ffffff;
+    border : none
+}
+.board p {
+    text-align: center;
+}
+
+.wrap{
+    background-color :rgb(38, 37, 37) ;
 }
