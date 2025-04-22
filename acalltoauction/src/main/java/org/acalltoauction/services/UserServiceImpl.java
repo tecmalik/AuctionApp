@@ -2,13 +2,10 @@ package org.acalltoauction.services;
 
 import org.acalltoauction.data.models.Lot;
 import org.acalltoauction.data.models.User;
+import org.acalltoauction.data.repositories.LotRepository;
 import org.acalltoauction.data.repositories.UserRepository;
-import org.acalltoauction.dto.requests.UserDeleteRequest;
-import org.acalltoauction.dto.requests.UserLoginRequest;
-import org.acalltoauction.dto.requests.UserSignUpRequest;
-import org.acalltoauction.dto.response.UserDeleteResponse;
-import org.acalltoauction.dto.response.UserLoginResponse;
-import org.acalltoauction.dto.response.UserSignUpResponse;
+import org.acalltoauction.dto.requests.*;
+import org.acalltoauction.dto.response.*;
 import org.acalltoauction.exceptions.InvalidCredentials;
 import org.acalltoauction.exceptions.InvalidUserException;
 import org.acalltoauction.exceptions.UserAlreadyExistException;
@@ -19,6 +16,8 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    LotRepository lotRepository;
 
     @Override
     public UserSignUpResponse signUp(UserSignUpRequest userSignUpRequest) {
@@ -71,10 +70,41 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createLot() {
+    public LotCreationResponse createLot(LotCreationRequest lotCreationRequest ) {
+        validateLotRequest(lotCreationRequest);
         Lot lot = new Lot();
-        lot.setname("")
+        lot.setLotName(lotCreationRequest.getLotName());
+        lot.setDescription(lotCreationRequest.getDescription());
+        lot.setDescription(lotCreationRequest.getDescription());
+        lotRepository.save(lot);
+        LotCreationResponse lotCreationResponse = new LotCreationResponse();
+        lotCreationResponse.setMessage("Create Successful, Cto be Dispatched by musa 090234567 ");
+        return lotCreationResponse;
+    }
 
+    @Override
+    public DeleteLotResponse deleteLot(DeleteLotRequest deleteLotRequest) {
+        validateDeleteRequest(deleteLotRequest);
+        Lot lot = lotRepository.findByLotName(deleteLotRequest.getLotName());
+        lotRepository.delete(lot);
+        DeleteLotResponse deleteLotResponse = new DeleteLotResponse();
+        deleteLotResponse.setMessage("Delete Successful");
+        return deleteLotResponse;
+    }
+
+    private void validateDeleteRequest(DeleteLotRequest deleteLotRequest) {
+        if (deleteLotRequest.getLotName() == null) throw new NullPointerException("Email is required");
+        if (deleteLotRequest.getLotName().trim().isEmpty())throw new NullPointerException("Email is required");
+
+    }
+
+    private void validateLotRequest(LotCreationRequest lotCreationRequest) {
+        if (lotCreationRequest.getLotName() == null) throw new NullPointerException("Email is required");
+        if (lotCreationRequest.getImageUrl() == null) throw new NullPointerException("Password is required");
+        if (lotCreationRequest.getDescription() == null) throw new NullPointerException("Description is required");
+        if (lotCreationRequest.getLotName().trim().isEmpty())throw new NullPointerException("Email is required");
+        if (lotCreationRequest.getImageUrl().trim().isEmpty())throw new NullPointerException("Password is required");
+        if (lotCreationRequest.getDescription().trim().isEmpty())throw new NullPointerException("Description is required");
     }
 
     private void validateUserDeleteRequest(UserDeleteRequest userDeleteRequest) {

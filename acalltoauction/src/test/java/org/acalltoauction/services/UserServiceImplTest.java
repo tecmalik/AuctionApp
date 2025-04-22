@@ -2,13 +2,8 @@ package org.acalltoauction.services;
 
 import org.acalltoauction.data.models.Lot;
 import org.acalltoauction.data.repositories.UserRepository;
-import org.acalltoauction.dto.requests.LotCreationRequest;
-import org.acalltoauction.dto.requests.UserDeleteRequest;
-import org.acalltoauction.dto.requests.UserLoginRequest;
-import org.acalltoauction.dto.requests.UserSignUpRequest;
-import org.acalltoauction.dto.response.UserDeleteResponse;
-import org.acalltoauction.dto.response.UserLoginResponse;
-import org.acalltoauction.dto.response.UserSignUpResponse;
+import org.acalltoauction.dto.requests.*;
+import org.acalltoauction.dto.response.*;
 import org.acalltoauction.exceptions.InvalidCredentials;
 import org.acalltoauction.exceptions.UserAlreadyExistException;
 import org.junit.jupiter.api.Test;
@@ -38,7 +33,6 @@ class UserServiceImplTest {
         userRequest.setPassword("password");
         userRequest.setNin("12345672345");
         UserSignUpResponse response = userServiceImpl.signUp(userRequest);
-//        assertEquals(1,userRepository.count());
         assertThat(response,notNullValue());
         UserDeleteRequest userDeleteRequest = new UserDeleteRequest();
         userDeleteRequest.setEmail("test@acalltoauction.com");
@@ -54,7 +48,6 @@ class UserServiceImplTest {
         userRequest.setPassword("password");
         userRequest.setNin("12345672345");
         UserSignUpResponse response = userServiceImpl.signUp(userRequest);
-//        assertEquals(1,userRepository.count());
         assertThat(response,notNullValue());
         UserLoginRequest userLoginRequest = new UserLoginRequest();
         userLoginRequest.setEmail("test@acalltoauction.com");
@@ -133,15 +126,24 @@ class UserServiceImplTest {
     }
     @Test
     public void CanCreateALot_Test(){
-        UserSignUpRequest userRequest = new UserSignUpRequest();
-        userRequest.setEmail("test@acalltoauction.com");
-        userRequest.setPassword("password");
-        userRequest.setNin("12345672345");
-        UserSignUpResponse response = userServiceImpl.signUp(userRequest);
-        assertThat(response,notNullValue());
-        LotCreationRequest lot = new LotCreationRequest();
+//        UserSignUpRequest userRequest = new UserSignUpRequest();
+//        userRequest.setEmail("test@acalltoauction.com");
+//        userRequest.setPassword("password");
+//        userRequest.setNin("12345672345");
+//        UserSignUpResponse response = userServiceImpl.signUp(userRequest);
+//        assertThat(response,notNullValue());
 
-        userService.createLot(lot);
+        LotCreationRequest lotRequest = new LotCreationRequest();
+        lotRequest.setLotName("myNewBag");
+        lotRequest.setDescription("BIG Blue dark bag");
+        lotRequest.setImageUrl("image.url");
+        LotCreationResponse lotCreationResponse = userService.createLot(lotRequest);
+        assertThat(lotCreationResponse,notNullValue());
+        DeleteLotRequest deleteLotRequest = new DeleteLotRequest();
+        deleteLotRequest.setLotName("myNewBag");
+        DeleteLotResponse userDeleteResponse = userServiceImpl.deleteLot(deleteLotRequest);
+        assertThat(userDeleteResponse,notNullValue());
+
 
 
     };

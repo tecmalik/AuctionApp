@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LotRepository extends MongoRepository <Lot,String> {
+
+    Lot findByLotName(String lotName);
+
 }
