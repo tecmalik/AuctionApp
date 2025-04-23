@@ -1,10 +1,11 @@
 package org.acalltoauction.services;
 
-import org.acalltoauction.data.models.Lot;
+import org.acalltoauction.data.repositories.LotRepository;
 import org.acalltoauction.data.repositories.UserRepository;
 import org.acalltoauction.dto.requests.*;
 import org.acalltoauction.dto.response.*;
 import org.acalltoauction.exceptions.InvalidCredentials;
+import org.acalltoauction.exceptions.LotAlreadyExist;
 import org.acalltoauction.exceptions.UserAlreadyExistException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
@@ -24,6 +24,8 @@ class UserServiceImplTest {
     UserRepository userRepository;
     @Autowired
     private UserServiceImpl userServiceImpl;
+    @Autowired
+    private LotRepository lotRepository;
 
 
     @Test
@@ -143,10 +145,35 @@ class UserServiceImplTest {
         deleteLotRequest.setLotName("myNewBag");
         DeleteLotResponse userDeleteResponse = userServiceImpl.deleteLot(deleteLotRequest);
         assertThat(userDeleteResponse,notNullValue());
-
-
-
     };
+    @Test
+    public void userCanNotCreateDuplicate_Lot(){
+        LotCreationRequest lotRequest = new LotCreationRequest();
+        lotRequest.setLotName("myNewBag");
+        lotRequest.setDescription("BIG Blue dark bag");
+        lotRequest.setImageUrl("image.url");
+        LotCreationResponse lotCreationResponse = userService.createLot(lotRequest);
+        assertThat(lotCreationResponse,notNullValue());
+        LotCreationRequest secondLotRequest = new LotCreationRequest();
+        secondLotRequest.setLotName("myNewBag");
+        secondLotRequest.setDescription("BIG Blue dark bag");
+        secondLotRequest.setImageUrl("image.url");
+        assertThrows(LotAlreadyExist.class,()->userService.createLot(secondLotRequest));
+        DeleteLotRequest deleteLotRequest = new DeleteLotRequest();
+        deleteLotRequest.setLotName("myNewBag");
+        DeleteLotResponse userDeleteResponse = userServiceImpl.deleteLot(deleteLotRequest);
+        assertThat(userDeleteResponse,notNullValue());
+    }
+    @Test
+    public void UserCanConfirmTheValidityOf_A_Lot_Test(){
+        LotCreationRequest lotRequest = new LotCreationRequest();
+        lotRequest.setLotName("myNewBag");
+        lotRequest.setDescription("BIG Blue dark bag");
+        lotRequest.setImageUrl("image.url");
+        LotCreationResponse lotCreationResponse = userService.createLot(lotRequest);
+        assertThat(lotCreationResponse,notNullValue());
+
+    }
 
 
 }

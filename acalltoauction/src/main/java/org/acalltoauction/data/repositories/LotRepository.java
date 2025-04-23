@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface LotRepository extends MongoRepository <Lot,String> {
 
     Lot findByLotName(String lotName);
-
+    Lot findByImageUrl(String imageUrl);
 }

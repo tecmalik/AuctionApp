@@ -8,6 +8,7 @@ import org.acalltoauction.dto.requests.*;
 import org.acalltoauction.dto.response.*;
 import org.acalltoauction.exceptions.InvalidCredentials;
 import org.acalltoauction.exceptions.InvalidUserException;
+import org.acalltoauction.exceptions.LotAlreadyExist;
 import org.acalltoauction.exceptions.UserAlreadyExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,14 +73,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public LotCreationResponse createLot(LotCreationRequest lotCreationRequest ) {
         validateLotRequest(lotCreationRequest);
+        ValidateLotExistence(lotCreationRequest);
         Lot lot = new Lot();
         lot.setLotName(lotCreationRequest.getLotName());
         lot.setDescription(lotCreationRequest.getDescription());
         lot.setDescription(lotCreationRequest.getDescription());
         lotRepository.save(lot);
         LotCreationResponse lotCreationResponse = new LotCreationResponse();
-        lotCreationResponse.setMessage("Create Successful, Cto be Dispatched by musa 090234567 ");
+        lotCreationResponse.setMessage("Create Successful, Lto be Dispatched by musa 090234567 ");
         return lotCreationResponse;
+    }
+
+    private void ValidateLotExistence(LotCreationRequest lotCreationRequest){
+        if (lotRepository.findByLotName(lotCreationRequest.getLotName()) != null)throw new LotAlreadyExist("lot already exist");
+        if (lotRepository.findByImageUrl(lotCreationRequest.getImageUrl()) != null)throw new LotAlreadyExist("image already exist");
+
     }
 
     @Override
