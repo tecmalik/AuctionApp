@@ -22,6 +22,7 @@ public class User {
     private String dateOfBirth;
     private Address address;
     private Role Role;
+    private String bvn;
 
 }
 

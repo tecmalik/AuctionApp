@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class UserSignUpRequest {
-    @Email
+    @Email(message = "enter a valid email")
     private String email;
-    @Size(min = 5,message = "password must have at least 3 characters!")
+    @Size(min = 3,message = "password must have at least 3 characters!")
     @Size(max = 20,message = "password must have most 20 characters")
     private String password;
-    @Size(min = 11,max=11)
+    @Size(min = 11,max=11, message="input a valid national identification number ")
     private String nin;
 }
