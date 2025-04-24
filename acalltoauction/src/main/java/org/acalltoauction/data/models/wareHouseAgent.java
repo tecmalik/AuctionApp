@@ -1,5 +1,7 @@
 package org.acalltoauction.data.models;
 
-public class wareHouseAgent {
+public class wareHouseAgent extends User{
+
+
 
 }

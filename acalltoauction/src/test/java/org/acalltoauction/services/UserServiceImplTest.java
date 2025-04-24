@@ -165,17 +165,21 @@ class UserServiceImplTest {
         assertThat(userDeleteResponse,notNullValue());
     }
     @Test
-    public void UserCanConfirmTheValidityOf_A_Lot_Test(){
+    public void UserCanCheckTheStatusOf_A_Lot_Test(){
         LotCreationRequest lotRequest = new LotCreationRequest();
         lotRequest.setLotName("myNewBag");
         lotRequest.setDescription("BIG Blue dark bag");
         lotRequest.setImageUrl("image.url");
         LotCreationResponse lotCreationResponse = userService.createLot(lotRequest);
         assertThat(lotCreationResponse,notNullValue());
-        LotStatusRequest lotValidationRequest = new LotStatusRequest();
-        lotValidationRequest.setLotName("myNewBag");
-        LotStatusResponse lotStatusResponse =  userServiceImpl.checkStatus(lotValidationRequest);
+        LotStatusRequest lotStatusRequest = new LotStatusRequest();
+        lotStatusRequest.setLotName("myNewBag");
+        LotStatusResponse lotStatusResponse =  userServiceImpl.checkStatus(lotStatusRequest);
         assertThat(lotStatusResponse,notNullValue());
+        DeleteLotRequest deleteLotRequest = new DeleteLotRequest();
+        deleteLotRequest.setLotName("myNewBag");
+        DeleteLotResponse userDeleteResponse = userServiceImpl.deleteLot(deleteLotRequest);
+        assertThat(userDeleteResponse,notNullValue());
 
 
 

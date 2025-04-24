@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
         lot.setLotName(lotCreationRequest.getLotName());
         lot.setDescription(lotCreationRequest.getDescription());
         lot.setDescription(lotCreationRequest.getDescription());
+        lot.setLotStatus(LotStatus.TO_BE_DISPATCHED);
         lotRepository.save(lot);
         LotCreationResponse lotCreationResponse = new LotCreationResponse();
         lotCreationResponse.setMessage("Create Successful, Lto be Dispatched by musa 090234567 ");
@@ -104,18 +105,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public LotStatusResponse checkStatus(LotStatusRequest lotStatusRequest) {
         validateLotStatusRequest(lotStatusRequest);
-        lotStatusRequest.getLotName();
-        return null;
+        LotStatus lotStatus = lotRepository
+                        .findByLotName(lotStatusRequest
+                        .getLotName())
+                        .getLotStatus();
+        LotStatusResponse lotStatusResponse = new LotStatusResponse();
+        lotStatusResponse.setStatus(lotStatus);
+        return lotStatusResponse;
     }
 
+
     private void validateLotStatusRequest(LotStatusRequest lotStatusRequest) {
-        if (lotStatusRequest.getLotName() == null || lotStatusRequest.getLotName() .trim().isEmpty()) throw new NullPointerException("request is required");
+        if (lotStatusRequest.getLotName() == null || lotStatusRequest
+                                                    .getLotName()
+                                                    .trim()
+                                                    .isEmpty()) throw new NullPointerException("request is required");
     }
 
 
     private void validateDeleteRequest(DeleteLotRequest deleteLotRequest) {
         if (deleteLotRequest.getLotName() == null) throw new NullPointerException("Email is required");
-        if (deleteLotRequest.getLotName().trim().isEmpty())throw new NullPointerException("Email is required");
+        if (deleteLotRequest
+                .getLotName()
+                .trim()
+                .isEmpty())throw new NullPointerException("Email is required");
 
     }
 
@@ -123,15 +136,27 @@ public class UserServiceImpl implements UserService {
         if (lotCreationRequest.getLotName() == null) throw new NullPointerException("Email is required");
         if (lotCreationRequest.getImageUrl() == null) throw new NullPointerException("Password is required");
         if (lotCreationRequest.getDescription() == null) throw new NullPointerException("Description is required");
-        if (lotCreationRequest.getLotName().trim().isEmpty())throw new NullPointerException("Email is required");
-        if (lotCreationRequest.getImageUrl().trim().isEmpty())throw new NullPointerException("Password is required");
-        if (lotCreationRequest.getDescription().trim().isEmpty())throw new NullPointerException("Description is required");
+        if (lotCreationRequest
+                .getLotName()
+                .trim()
+                .isEmpty())throw new NullPointerException("Email is required");
+        if (lotCreationRequest
+                .getImageUrl()
+                .trim()
+                .isEmpty())throw new NullPointerException("Password is required");
+        if (lotCreationRequest
+                .getDescription()
+                .trim()
+                .isEmpty())throw new NullPointerException("Description is required");
     }
 
     private void validateUserDeleteRequest(UserDeleteRequest userDeleteRequest) {
         if (userDeleteRequest.getEmail() == null) throw new NullPointerException("Email is required");
         if (userDeleteRequest.password == null) throw new NullPointerException("Password is required");
-        if (userDeleteRequest.getEmail().trim().isEmpty())throw new NullPointerException("Email is required");
+        if (userDeleteRequest
+                .getEmail()
+                .trim()
+                .isEmpty())throw new NullPointerException("Email is required");
         if (userDeleteRequest.password.trim().isEmpty())throw new NullPointerException("Password is required");
     }
 

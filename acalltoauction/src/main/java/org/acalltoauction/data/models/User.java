@@ -21,7 +21,7 @@ public class User {
     private String nin;
     private String dateOfBirth;
     private Address address;
-    private Role Role;
+    private Role role;
     private String bvn;
 
 }
