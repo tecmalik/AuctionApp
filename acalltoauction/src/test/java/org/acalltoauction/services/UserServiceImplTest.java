@@ -172,8 +172,11 @@ class UserServiceImplTest {
         lotRequest.setImageUrl("image.url");
         LotCreationResponse lotCreationResponse = userService.createLot(lotRequest);
         assertThat(lotCreationResponse,notNullValue());
-        LotSatus LotStatus =  userServiceImpl.checkSatus();
-        assertThat(LotStatus,);
+        LotStatusRequest lotValidationRequest = new LotStatusRequest();
+        lotValidationRequest.setLotName("myNewBag");
+        LotStatusResponse lotStatusResponse =  userServiceImpl.checkStatus(lotValidationRequest);
+        assertThat(lotStatusResponse,notNullValue());
+
 
 
     }

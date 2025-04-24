@@ -1,6 +1,7 @@
 package org.acalltoauction.services;
 
 import org.acalltoauction.data.models.Lot;
+import org.acalltoauction.data.models.LotStatus;
 import org.acalltoauction.data.models.User;
 import org.acalltoauction.data.repositories.LotRepository;
 import org.acalltoauction.data.repositories.UserRepository;
@@ -99,6 +100,18 @@ public class UserServiceImpl implements UserService {
         deleteLotResponse.setMessage("Delete Successful");
         return deleteLotResponse;
     }
+
+    @Override
+    public LotStatusResponse checkStatus(LotStatusRequest lotStatusRequest) {
+        validateLotStatusRequest(lotStatusRequest);
+        lotStatusRequest.getLotName();
+        return null;
+    }
+
+    private void validateLotStatusRequest(LotStatusRequest lotStatusRequest) {
+        if (lotStatusRequest.getLotName() == null || lotStatusRequest.getLotName() .trim().isEmpty()) throw new NullPointerException("request is required");
+    }
+
 
     private void validateDeleteRequest(DeleteLotRequest deleteLotRequest) {
         if (deleteLotRequest.getLotName() == null) throw new NullPointerException("Email is required");

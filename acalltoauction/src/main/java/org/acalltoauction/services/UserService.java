@@ -10,5 +10,6 @@ public interface UserService {
     UserDeleteResponse deleteUser(UserDeleteRequest userDeleteRequest);
     LotCreationResponse createLot(LotCreationRequest userLotRequest);
     DeleteLotResponse deleteLot(DeleteLotRequest deleteLotRequest);
+    LotStatusResponse checkStatus(LotStatusRequest lotStatusRequest);
 }
 
