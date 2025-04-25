@@ -181,7 +181,10 @@ class UserServiceImplTest {
         DeleteLotResponse userDeleteResponse = userServiceImpl.deleteLot(deleteLotRequest);
         assertThat(userDeleteResponse,notNullValue());
 
-
+    }
+    @Test
+    public void UserCanCreateAnAuction(){
+        LotCreateAnAuctionRequest lotCreateAnAuctionRequest = new LotCreateAuctionRequest();
 
     }
 
