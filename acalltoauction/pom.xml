@@ -69,6 +69,12 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
             <version>3.4.5</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>3.4.4</version>
+        </dependency>
 
     </dependencies>
 
