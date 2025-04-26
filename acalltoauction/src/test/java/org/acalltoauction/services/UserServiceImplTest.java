@@ -141,6 +141,7 @@ class UserServiceImplTest {
         lotRequest.setImageUrl("image.url");
         LotCreationResponse lotCreationResponse = userService.createLot(lotRequest);
         assertThat(lotCreationResponse,notNullValue());
+
         DeleteLotRequest deleteLotRequest = new DeleteLotRequest();
         deleteLotRequest.setLotName("myNewBag");
         DeleteLotResponse userDeleteResponse = userServiceImpl.deleteLot(deleteLotRequest);
@@ -184,7 +185,10 @@ class UserServiceImplTest {
     }
     @Test
     public void UserCanCreateAnAuction(){
-        CreateAuctionRequest AuctionRequest = new CreateAuctionRequest();
+        CreateAuctionRequest auctionRequest = new CreateAuctionRequest();
+        auctionRequest.setDate();
+
+
 
 
     }

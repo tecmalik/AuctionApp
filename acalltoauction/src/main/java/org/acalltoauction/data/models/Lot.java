@@ -1,6 +1,7 @@
 package org.acalltoauction.data.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,8 @@ public class Lot {
     @Id
     private String id;
     @DBRef
-    private User consignor;
+    @JsonIgnore
+    private User user;
     private String lotName;
     private String description;
     private String imageUrl;

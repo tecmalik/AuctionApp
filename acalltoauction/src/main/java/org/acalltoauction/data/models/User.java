@@ -4,7 +4,10 @@ package org.acalltoauction.data.models;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document(collection = "users")
 @Data
@@ -23,6 +26,8 @@ public class User {
     private Address address;
     private Role role;
     private String bvn;
+    @DBRef (lazy = true)
+    private Lot lot;
 
 }
 
