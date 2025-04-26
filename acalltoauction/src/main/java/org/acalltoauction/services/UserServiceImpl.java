@@ -1,5 +1,6 @@
 package org.acalltoauction.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.acalltoauction.data.models.Lot;
 import org.acalltoauction.data.models.LotStatus;
 import org.acalltoauction.data.models.User;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
