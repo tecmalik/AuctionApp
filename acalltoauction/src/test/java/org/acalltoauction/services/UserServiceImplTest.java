@@ -184,7 +184,8 @@ class UserServiceImplTest {
     }
     @Test
     public void UserCanCreateAnAuction(){
-        LotCreateAnAuctionRequest lotCreateAnAuctionRequest = new LotCreateAuctionRequest();
+        CreateAuctionRequest AuctionRequest = new CreateAuctionRequest();
+
 
     }
 

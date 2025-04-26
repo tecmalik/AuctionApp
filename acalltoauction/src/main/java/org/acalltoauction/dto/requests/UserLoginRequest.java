@@ -3,10 +3,12 @@ package org.acalltoauction.dto.requests;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class UserLoginRequest {
     @Email(message = "Enter a valid email")
     private String email;
