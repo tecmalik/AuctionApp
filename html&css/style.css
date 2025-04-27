@@ -109,7 +109,7 @@ background-color: #ffffff;
     background-color :rgb(38, 37, 37) ;
 }
 
- /* @keyframes logo-spin {
+@keyframes logo-spin {
     from {
       transform: rotate(0deg);
     }
@@ -117,14 +117,13 @@ background-color: #ffffff;
       transform: rotate(360deg);
     }
   }
-  
   @media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .welcomeText p{
+    .welcomeText p{ 
       animation: logo-spin infinite 20s linear;
     }
-  }  */
+  }  
 
-  .scrollButton{
+.scrollButton{
 
     background-color:  black;
     height: 20px;
