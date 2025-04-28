@@ -27,7 +27,7 @@ public class User {
     private Role role;
     private String bvn;
     @DBRef (lazy = true)
-    private Lot lot;
+    private List<Lot> lot;
 
 }
 

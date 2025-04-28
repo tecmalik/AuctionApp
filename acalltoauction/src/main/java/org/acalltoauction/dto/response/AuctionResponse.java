@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DeleteLotResponse {
-    String message;
+public class AuctionResponse {
+    private String message;
 }

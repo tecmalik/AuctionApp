@@ -1,19 +1,22 @@
 package org.acalltoauction.dto.requests;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-import org.acalltoauction.data.models.Lot;
 
 import java.util.Date;
 
 @Getter
 @Setter
-public class CreateAuctionRequest {
+public class AuctionRequest {
     private String Title;
-    private String description;
-    private String startingBid;
+    private String startingBidPrice;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private String date;
     private String time;
     private String duration;
+    private String lot;
+    private Date auctionDate;
+
 
 }

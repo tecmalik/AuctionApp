@@ -1,7 +1,5 @@
 package org.acalltoauction.services;
 
-import org.acalltoauction.data.repositories.LotRepository;
-import org.acalltoauction.data.repositories.UserRepository;
 import org.acalltoauction.dto.requests.*;
 import org.acalltoauction.dto.response.*;
 import org.acalltoauction.exceptions.InvalidCredentials;
@@ -10,6 +8,7 @@ import org.acalltoauction.exceptions.UserAlreadyExistException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,11 +20,8 @@ class UserServiceImplTest {
     @Autowired
     private UserService userService;
     @Autowired
-    UserRepository userRepository;
-    @Autowired
     private UserServiceImpl userServiceImpl;
-    @Autowired
-    private LotRepository lotRepository;
+
 
 
     @Test
@@ -185,8 +181,23 @@ class UserServiceImplTest {
     }
     @Test
     public void UserCanCreateAnAuction(){
-        CreateAuctionRequest auctionRequest = new CreateAuctionRequest();
-        auctionRequest.setDate();
+
+        LotCreationRequest lotRequest = new LotCreationRequest();
+        lotRequest.setLotName("myNewBag");
+        lotRequest.setDescription("BIG Blue dark bag");
+        lotRequest.setImageUrl("image.url");
+        LotCreationResponse lotCreationResponse = userService.createLot(lotRequest);
+        assertThat(lotCreationResponse,notNullValue());
+
+
+        AuctionRequest auctionRequest = new AuctionRequest();
+        auctionRequest.setDate("2025-04-29");
+        auctionRequest.setStartingBidPrice("2000");
+        auctionRequest.setDuration( "4 seconds");
+        auctionRequest.setTitle("a big bag");
+        auctionRequest.setLot("my bag");
+        AuctionResponse auctionResponse = userService.createAuction(auctionRequest);
+        assertThat(auctionResponse,notNullValue());
 
 
 
