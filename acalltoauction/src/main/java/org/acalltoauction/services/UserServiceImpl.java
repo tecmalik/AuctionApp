@@ -130,6 +130,7 @@ public class UserServiceImpl implements UserService {
        lotRepository.findByLotName(auctionRequest.getLot());
 //       auction.setLot( );
 
+        
         return null;
     }
 
