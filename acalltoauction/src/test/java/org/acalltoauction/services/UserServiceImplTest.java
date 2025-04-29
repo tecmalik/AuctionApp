@@ -198,7 +198,7 @@ class UserServiceImplTest {
         auctionRequest.setStartingBidPrice("2000");
         auctionRequest.setDuration( "4 seconds");
         auctionRequest.setTitle("a big bag");
-        auctionRequest.setLot("my bag");
+        auctionRequest.setLotName("my bag");
         AuctionResponse auctionResponse = userService.createAuction(auctionRequest);
         assertThat(auctionResponse,notNullValue());
 

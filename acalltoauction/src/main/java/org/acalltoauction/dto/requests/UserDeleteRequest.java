@@ -13,8 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserDeleteRequest {
     @Valid
-
-    @NotNull(message = "")
     @Email(message = "Valid Email Required")
     private String email;
     @Size(min = 3,message = "password must have at least 3 characters!")
