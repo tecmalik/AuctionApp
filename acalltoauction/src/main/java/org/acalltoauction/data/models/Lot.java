@@ -17,7 +17,6 @@ public class Lot {
     @Id
     private String id;
     @DBRef
-    @JsonIgnore
     private User user;
     private String lotName;
     private String description;

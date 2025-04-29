@@ -26,8 +26,6 @@ public class User {
     private Address address;
     private Role role;
     private String bvn;
-    @DBRef (lazy = true)
-    private List<Lot> lot;
 
 }
 
