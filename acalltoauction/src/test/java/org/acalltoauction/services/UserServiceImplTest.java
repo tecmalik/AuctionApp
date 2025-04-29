@@ -1,5 +1,6 @@
 package org.acalltoauction.services;
 
+import org.acalltoauction.data.repositories.UserRepository;
 import org.acalltoauction.dto.requests.*;
 import org.acalltoauction.dto.response.*;
 import org.acalltoauction.exceptions.InvalidCredentials;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
@@ -20,8 +22,7 @@ class UserServiceImplTest {
     @Autowired
     private UserService userService;
     @Autowired
-    private UserServiceImpl userServiceImpl;
-
+    private UserRepository userRepository;
 
 
     @Test
@@ -30,12 +31,12 @@ class UserServiceImplTest {
         userRequest.setEmail("test@acalltoauction.com");
         userRequest.setPassword("password");
         userRequest.setNin("12345672345");
-        UserSignUpResponse response = userServiceImpl.signUp(userRequest);
+        UserSignUpResponse response = userService.signUp(userRequest);
         assertThat(response,notNullValue());
         UserDeleteRequest userDeleteRequest = new UserDeleteRequest();
         userDeleteRequest.setEmail("test@acalltoauction.com");
         userDeleteRequest.setPassword("password");
-        UserDeleteResponse userDeleteResponse = userServiceImpl.deleteUser(userDeleteRequest);
+        UserDeleteResponse userDeleteResponse = userService.deleteUser(userDeleteRequest);
         assertThat(userDeleteResponse,notNullValue());
 
     }
@@ -45,17 +46,19 @@ class UserServiceImplTest {
         userRequest.setEmail("test@acalltoauction.com");
         userRequest.setPassword("password");
         userRequest.setNin("12345672345");
-        UserSignUpResponse response = userServiceImpl.signUp(userRequest);
+        UserSignUpResponse response = userService.signUp(userRequest);
+//        assertEquals("Successful",response);
         assertThat(response,notNullValue());
+        assertEquals(1,userRepository.count());
         UserLoginRequest userLoginRequest = new UserLoginRequest();
         userLoginRequest.setEmail("test@acalltoauction.com");
         userLoginRequest.setPassword("password");
-        UserLoginResponse userLoginResponse = userServiceImpl.login(userLoginRequest);
+        UserLoginResponse userLoginResponse = userService.login(userLoginRequest);
         assertThat(userLoginResponse,notNullValue());
         UserDeleteRequest userDeleteRequest = new UserDeleteRequest();
         userDeleteRequest.setEmail("test@acalltoauction.com");
         userDeleteRequest.setPassword("password");
-        UserDeleteResponse userDeleteResponse = userServiceImpl.deleteUser(userDeleteRequest);
+        UserDeleteResponse userDeleteResponse = userService.deleteUser(userDeleteRequest);
         assertThat(userDeleteResponse,notNullValue());
     }
     @Test
@@ -64,17 +67,17 @@ class UserServiceImplTest {
         userRequest.setEmail("test@acalltoauction.com");
         userRequest.setPassword("password");
         userRequest.setNin("12345672345");
-        UserSignUpResponse response = userServiceImpl.signUp(userRequest);
+        UserSignUpResponse response = userService.signUp(userRequest);
         assertThat(response,notNullValue());
         UserSignUpRequest secondUserRequest = new UserSignUpRequest();
         secondUserRequest.setEmail("test@acalltoauction.com");
         secondUserRequest.setPassword("password");
         secondUserRequest.setNin("12345672345");
-        assertThrows( UserAlreadyExistException.class, ()-> userServiceImpl.signUp(secondUserRequest));
+        assertThrows( UserAlreadyExistException.class, ()-> userService.signUp(secondUserRequest));
         UserDeleteRequest userDeleteRequest = new UserDeleteRequest();
         userDeleteRequest.setEmail("test@acalltoauction.com");
         userDeleteRequest.setPassword("password");
-        UserDeleteResponse userDeleteResponse = userServiceImpl.deleteUser(userDeleteRequest);
+        UserDeleteResponse userDeleteResponse = userService.deleteUser(userDeleteRequest);
         assertThat(userDeleteResponse,notNullValue());
 
     }
@@ -84,7 +87,7 @@ class UserServiceImplTest {
         userRequest.setEmail("  ");
         userRequest.setPassword("password");
         userRequest.setNin("12345672345");
-        assertThrows(NullPointerException.class, () -> userServiceImpl.signUp(userRequest));
+        assertThrows(NullPointerException.class, () -> userService.signUp(userRequest));
     }
     @Test
     public void UserCanNotSignUpWithAnEmptyPasswordTest(){
@@ -92,7 +95,7 @@ class UserServiceImplTest {
         userRequest.setEmail("test@acalltoauction.com");
         userRequest.setPassword(" ");
         userRequest.setNin("12345672345");
-        assertThrows( NullPointerException.class, ()-> userServiceImpl.signUp(userRequest));
+        assertThrows( NullPointerException.class, ()-> userService.signUp(userRequest));
     }
     @Test
     public void UserCanNotSignupWithAnEmptyNinTest(){
@@ -100,7 +103,7 @@ class UserServiceImplTest {
         userRequest.setEmail("test@acalltoauction.com");
         userRequest.setPassword("password");
         userRequest.setNin("  ");
-        assertThrows( NullPointerException.class, ()-> userServiceImpl.signUp(userRequest));
+        assertThrows( NullPointerException.class, ()-> userService.signUp(userRequest));
 
     }
     @Test
@@ -109,21 +112,21 @@ class UserServiceImplTest {
         userRequest.setEmail("test@acalltoauction.com");
         userRequest.setPassword("password");
         userRequest.setNin("12345672345");
-        UserSignUpResponse response = userServiceImpl.signUp(userRequest);
+        UserSignUpResponse response = userService.signUp(userRequest);
         assertThat(response,notNullValue());
         UserLoginRequest userLoginRequest = new UserLoginRequest();
         userLoginRequest.setEmail("test@acalltoauction.com");
         userLoginRequest.setPassword("invalidPassword");
-        assertThrows(InvalidCredentials.class,()->userServiceImpl.login(userLoginRequest));
+        assertThrows(InvalidCredentials.class,()->userService.login(userLoginRequest));
         UserDeleteRequest userDeleteRequest = new UserDeleteRequest();
         userDeleteRequest.setEmail("test@acalltoauction.com");
         userDeleteRequest.setPassword("password");
-        UserDeleteResponse userDeleteResponse = userServiceImpl.deleteUser(userDeleteRequest);
+        UserDeleteResponse userDeleteResponse = userService.deleteUser(userDeleteRequest);
         assertThat(userDeleteResponse,notNullValue());
 
     }
     @Test
-    public void CanCreateALot_Test(){
+    public void UserCanRegisterAndCreateALot_Test(){
 //        UserSignUpRequest userRequest = new UserSignUpRequest();
 //        userRequest.setEmail("test@acalltoauction.com");
 //        userRequest.setPassword("password");
@@ -140,7 +143,7 @@ class UserServiceImplTest {
 
         DeleteLotRequest deleteLotRequest = new DeleteLotRequest();
         deleteLotRequest.setLotName("myNewBag");
-        DeleteLotResponse userDeleteResponse = userServiceImpl.deleteLot(deleteLotRequest);
+        DeleteLotResponse userDeleteResponse = userService.deleteLot(deleteLotRequest);
         assertThat(userDeleteResponse,notNullValue());
     };
     @Test
@@ -158,7 +161,7 @@ class UserServiceImplTest {
         assertThrows(LotAlreadyExist.class,()->userService.createLot(secondLotRequest));
         DeleteLotRequest deleteLotRequest = new DeleteLotRequest();
         deleteLotRequest.setLotName("myNewBag");
-        DeleteLotResponse userDeleteResponse = userServiceImpl.deleteLot(deleteLotRequest);
+        DeleteLotResponse userDeleteResponse = userService.deleteLot(deleteLotRequest);
         assertThat(userDeleteResponse,notNullValue());
     }
     @Test
@@ -171,11 +174,11 @@ class UserServiceImplTest {
         assertThat(lotCreationResponse,notNullValue());
         LotStatusRequest lotStatusRequest = new LotStatusRequest();
         lotStatusRequest.setLotName("myNewBag");
-        LotStatusResponse lotStatusResponse =  userServiceImpl.checkStatus(lotStatusRequest);
+        LotStatusResponse lotStatusResponse =  userService.checkStatus(lotStatusRequest);
         assertThat(lotStatusResponse,notNullValue());
         DeleteLotRequest deleteLotRequest = new DeleteLotRequest();
         deleteLotRequest.setLotName("myNewBag");
-        DeleteLotResponse userDeleteResponse = userServiceImpl.deleteLot(deleteLotRequest);
+        DeleteLotResponse userDeleteResponse = userService.deleteLot(deleteLotRequest);
         assertThat(userDeleteResponse,notNullValue());
 
     }

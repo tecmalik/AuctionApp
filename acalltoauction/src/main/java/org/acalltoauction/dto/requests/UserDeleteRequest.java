@@ -1,6 +1,8 @@
 package org.acalltoauction.dto.requests;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +12,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class UserDeleteRequest {
+    @Valid
+
+    @NotNull(message = "")
     @Email(message = "Valid Email Required")
     private String email;
     @Size(min = 3,message = "password must have at least 3 characters!")
