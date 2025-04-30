@@ -47,7 +47,7 @@ class UserServiceImplTest {
         userRequest.setPassword("password");
         userRequest.setNin("12345672345");
         UserSignUpResponse response = userService.signUp(userRequest);
-//        assertEquals("Successful",response);
+        assertEquals("Login Successful", response.getMessage());
         assertThat(response,notNullValue());
         assertEquals(1,userRepository.count());
         UserLoginRequest userLoginRequest = new UserLoginRequest();
@@ -126,7 +126,7 @@ class UserServiceImplTest {
 
     }
     @Test
-    public void UserCanRegisterAndCreateALot_Test(){
+    public void UserCanSignUpAndCreateALot_Test(){
 //        UserSignUpRequest userRequest = new UserSignUpRequest();
 //        userRequest.setEmail("test@acalltoauction.com");
 //        userRequest.setPassword("password");
@@ -192,7 +192,6 @@ class UserServiceImplTest {
         LotCreationResponse lotCreationResponse = userService.createLot(lotRequest);
         assertThat(lotCreationResponse,notNullValue());
 
-
         AuctionRequest auctionRequest = new AuctionRequest();
         auctionRequest.setDate("2025-04-29");
         auctionRequest.setStartingBidPrice("2000");
@@ -202,9 +201,22 @@ class UserServiceImplTest {
         AuctionResponse auctionResponse = userService.createAuction(auctionRequest);
         assertThat(auctionResponse,notNullValue());
 
+    }
+    @Test
+    public  void UserCanDeleteA_Auction(){
+        DeleteAuctionRequest deleteAuctionRequest = new DeleteAuctionRequest();
+        deleteAuctionRequest.setAuctionName("myNewBag");
+        LotDeleteAuctionResponse auctionDeleteResponse = userService.deleteAuction(deleteAuctionRequest);
+        assertThat(auctionDeleteResponse,notNullValue());
 
-
-
+        AuctionRequest auctionRequest = new AuctionRequest();
+        auctionRequest.setDate("2025-04-29");
+        auctionRequest.setStartingBidPrice("2000");
+        auctionRequest.setDuration( "4 seconds");
+        auctionRequest.setTitle("a big bag");
+        auctionRequest.setLotName("my bag");
+        AuctionResponse auctionResponse = userService.createAuction(auctionRequest);
+        assertThat(auctionResponse,notNullValue());
     }
 
 
