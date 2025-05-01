@@ -48,7 +48,7 @@ class UserServiceImplTest {
         userRequest.setPassword("password");
         userRequest.setNin("12345672345");
         UserSignUpResponse response = userService.signUp(userRequest);
-        assertEquals("Login Successful", response.getMessage());
+        assertEquals("SignUp Successful", response.getMessage());
         assertThat(response,notNullValue());
         assertEquals(1,userRepository.count());
         UserLoginRequest userLoginRequest = new UserLoginRequest();
@@ -192,8 +192,7 @@ class UserServiceImplTest {
         lotRequest.setImageUrl("image.url");
         LotCreationResponse lotCreationResponse = userService.createLot(lotRequest);
         assertThat(lotCreationResponse,notNullValue());
-
-
+        
         AuctionRequest auctionRequest = new AuctionRequest();
         auctionRequest.setDate("2025-04-29");
         auctionRequest.setStartingBidPrice("2000");
