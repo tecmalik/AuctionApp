@@ -1,10 +1,8 @@
 package org.acalltoauction.services;
 
 import lombok.extern.slf4j.Slf4j;
-import org.acalltoauction.data.models.Auction;
-import org.acalltoauction.data.models.Lot;
-import org.acalltoauction.data.models.LotStatus;
-import org.acalltoauction.data.models.User;
+import org.acalltoauction.data.models.*;
+import org.acalltoauction.data.repositories.AuctionRepository;
 import org.acalltoauction.data.repositories.LotRepository;
 import org.acalltoauction.data.repositories.UserRepository;
 import org.acalltoauction.dto.requests.*;
@@ -16,15 +14,20 @@ import org.acalltoauction.exceptions.UserAlreadyExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    LotRepository lotRepository;
+    private LotRepository lotRepository;
     @Autowired
-    private LotServiceImpl lotServiceImpl;
+    private AuctionRepository auctionRepository;
 
     @Override
     public UserSignUpResponse signUp(UserSignUpRequest userSignUpRequest) {
@@ -123,15 +126,44 @@ public class UserServiceImpl implements UserService {
     @Override
     public AuctionResponse createAuction(AuctionRequest auctionRequest) {
         validateAuctionRequest(auctionRequest);
-       Auction auction = new Auction();
-       auction.setCurrentBidPrice(auction.getCurrentBidPrice());
-       auction.setDuration(auctionRequest.getDuration());
-       auction.setTitle(auctionRequest.getTitle());
-       lotRepository.findByLotName(auctionRequest.getLot());
-//       auction.setLot( );
+        Auction auction = new Auction();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date auctionDate;
+        try {
+            auctionDate = simpleDateFormat.parse(auctionRequest.getDate());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        auction.setAuctionDate(auctionDate);
+        String auctionStartingBid =  auctionRequest.getStartingBidPrice();
+        BigDecimal price = new BigDecimal(auctionStartingBid);
+        auction.setStartingBid(price);
+        auction.setDuration(auctionRequest.getDuration());
+        auction.setTitle(auctionRequest.getTitle());
+        auction.setLotName(auctionRequest.getLotName());
+        auction.setAuctionStatus(AuctionStatus.FUTURE_BID);
+        auction.setCurrentBidPrice(auction.getCurrentBidPrice());
+        auction.setDuration(auctionRequest.getDuration());
+        auction.setTitle(auctionRequest.getTitle());
+        Auction foundAuction = auctionRepository.findByTitle(auctionRequest.getLotName());
+
 
 
         return null;
+    }
+
+    @Override
+    public DeleteAuctionResponse deleteAuction(DeleteAuctionRequest deleteAuctionRequest) {
+        verifyRequest(deleteAuctionRequest);
+        Auction auction = auctionRepository.findByTitle(deleteAuctionRequest.getAuctionTitle());
+        auctionRepository.deleteByTitle(auction);
+        DeleteAuctionResponse deleteAuctionResponse = new DeleteAuctionResponse();
+        deleteAuctionResponse.setMessage("Delete Successful");
+        return deleteAuctionResponse;
+    }
+
+    private void verifyRequest(DeleteAuctionRequest deleteAuctionRequest) {
+        if (auctionRepository.findByTitle(deleteAuctionRequest.getAuctionTitle()) == null) throw new NullPointerException(" invalid Title") ;
     }
 
     private void validateAuctionRequest(AuctionRequest auctionRequest) {
@@ -147,10 +179,6 @@ public class UserServiceImpl implements UserService {
                 .getTitle()
                 .trim()
                 .isEmpty()) throw new NullPointerException("Title is required");
-        if (auctionRequest.getDuration() == null || auctionRequest
-                .getDuration()
-                .trim()
-                .isEmpty()) throw new NullPointerException("Duration is required");
     }
 
 

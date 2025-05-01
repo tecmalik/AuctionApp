@@ -11,7 +11,6 @@ public interface UserService {
     DeleteLotResponse deleteLot(DeleteLotRequest deleteLotRequest);
     LotStatusResponse checkStatus(LotStatusRequest lotStatusRequest);
     AuctionResponse createAuction(AuctionRequest auctionRequest);
-
-    LotCreationResponse deleteAuction(org.acalltoauction.dto.requests.DeleteAuctionRequest deleteAuctionRequest);
+    DeleteAuctionResponse deleteAuction(DeleteAuctionRequest deleteAuctionRequest);
 }
 

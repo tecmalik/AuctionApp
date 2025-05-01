@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import org.acalltoauction.data.models.Duration;
 
 import java.util.Date;
 
@@ -20,7 +21,7 @@ public class AuctionRequest {
     @NotBlank(message = "time required")
     private String time;
     @NotBlank(message = "duration required")
-    private String duration;
+    private Duration duration;
     @NotBlank(message = "lotName required")
     private String lotName;
     @NotBlank(message = "auctionDate required")

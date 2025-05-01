@@ -1,5 +1,6 @@
 package org.acalltoauction.services;
 
+import org.acalltoauction.data.models.Duration;
 import org.acalltoauction.data.repositories.UserRepository;
 import org.acalltoauction.dto.requests.*;
 import org.acalltoauction.dto.response.*;
@@ -20,9 +21,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 class UserServiceImplTest {
     @Autowired
-    private UserService userService;
+    UserService userService;
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
 
     @Test
@@ -192,33 +193,28 @@ class UserServiceImplTest {
         LotCreationResponse lotCreationResponse = userService.createLot(lotRequest);
         assertThat(lotCreationResponse,notNullValue());
 
+
         AuctionRequest auctionRequest = new AuctionRequest();
         auctionRequest.setDate("2025-04-29");
         auctionRequest.setStartingBidPrice("2000");
-        auctionRequest.setDuration( "4 seconds");
+        auctionRequest.setDuration(Duration.THIRTY_SECONDS);
         auctionRequest.setTitle("a big bag");
-        auctionRequest.setLotName("my bag");
+        auctionRequest.setLotName("myNewBag");
         AuctionResponse auctionResponse = userService.createAuction(auctionRequest);
         assertThat(auctionResponse,notNullValue());
-
-    }
-    @Test
-    public  void UserCanDeleteA_Auction(){
         DeleteAuctionRequest deleteAuctionRequest = new DeleteAuctionRequest();
-        deleteAuctionRequest.setAuctionName("myNewBag");
-        LotDeleteAuctionResponse auctionDeleteResponse = userService.deleteAuction(deleteAuctionRequest);
+        deleteAuctionRequest.setAuctionTitle("myNewBag");
+        DeleteAuctionResponse auctionDeleteResponse = userService.deleteAuction(deleteAuctionRequest);
         assertThat(auctionDeleteResponse,notNullValue());
-
-        AuctionRequest auctionRequest = new AuctionRequest();
-        auctionRequest.setDate("2025-04-29");
-        auctionRequest.setStartingBidPrice("2000");
-        auctionRequest.setDuration( "4 seconds");
-        auctionRequest.setTitle("a big bag");
-        auctionRequest.setLotName("my bag");
-        AuctionResponse auctionResponse = userService.createAuction(auctionRequest);
-        assertThat(auctionResponse,notNullValue());
+        DeleteLotRequest deleteLotRequest = new DeleteLotRequest();
+        deleteLotRequest.setLotName("myNewBag");
+        DeleteLotResponse userDeleteResponse = userService.deleteLot(deleteLotRequest);
+        assertThat(userDeleteResponse,notNullValue());
     }
+    
+    @Test
+    public void passTest(){
 
-
+    }
 
 }

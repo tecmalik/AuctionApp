@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
@@ -20,10 +19,10 @@ public class Auction {
     private String id;
     private BigDecimal StartingBid;
     private String title;
-    private String duration;
+    private Duration duration;
     private AuctionStatus auctionStatus;
-    DBRef lotRef;
-    private Lot Lot;
+    private String lotName;
+    private String userId;
     private Date auctionDate;
     private LocalDate auctionStarTime;
     private LocalDate auctionEndTime;
