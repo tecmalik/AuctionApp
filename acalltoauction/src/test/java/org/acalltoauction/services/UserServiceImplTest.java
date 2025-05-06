@@ -192,7 +192,7 @@ class UserServiceImplTest {
         lotRequest.setImageUrl("image.url");
         LotCreationResponse lotCreationResponse = userService.createLot(lotRequest);
         assertThat(lotCreationResponse,notNullValue());
-        
+
         AuctionRequest auctionRequest = new AuctionRequest();
         auctionRequest.setDate("2025-04-29");
         auctionRequest.setStartingBidPrice("2000");
