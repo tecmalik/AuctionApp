@@ -1,2 +1,2 @@
 # TheAuctionApp.
-This web app is an interesting auctioneer tool to ensure transparent bidding between dealers and in worldwide auctions.
+Built This auction application, using Maven, addresses the critical need for trust and secure connections between auctioneers and auctioneers.  It facilitates live auctions, integrating payment security and logistics providers.  The application leverages a layered architecture and the observer design pattern for scalability and maintainability.  Key technologies include WebSockets for real-time communication, and MongoDB for persistent data storage.  Dependencies are managed effectively to ensure robust performance and reliability.
