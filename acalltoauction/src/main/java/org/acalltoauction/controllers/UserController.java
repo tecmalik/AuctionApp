@@ -24,9 +24,9 @@ public class UserController {
     public ResponseEntity<?> signUp(@Valid @RequestBody UserSignUpRequest userSignUpRequest){
         try{
             UserSignUpResponse userSignUpResponse = userService.signUp(userSignUpRequest);
-            return new ResponseEntity<>(new ApiResponse(true , userSignUpResponse), HttpStatus.CREATED);
+            return new ResponseEntity<>(new ApiResponse(true , userSignUpResponse, "201"), HttpStatus.CREATED);
         }catch(Exception exception){
-            return new ResponseEntity<>(new ApiResponse(false , exception.getMessage()),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ApiResponse(false , exception.getMessage()," "),HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -34,18 +34,18 @@ public class UserController {
     public ResponseEntity<?> login(@Valid @RequestBody UserLoginRequest userLoginRequest){
         try{
             UserLoginResponse userLoginResponse = userService.login(userLoginRequest);
-            return new ResponseEntity<>(new ApiResponse(true , userLoginResponse), HttpStatus.OK);
+            return new ResponseEntity<>(new ApiResponse(true , userLoginResponse," "), HttpStatus.OK);
         }catch(Exception exception){
-            return new ResponseEntity<>(new ApiResponse(false , exception.getMessage()),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ApiResponse(false , exception.getMessage()," "),HttpStatus.BAD_REQUEST);
         }
     }
     @DeleteMapping("/delete/{userEmail}")
     public ResponseEntity<?> deleteUser(@RequestBody UserDeleteRequest userDeleteRequest){
         try {
             UserDeleteResponse userDeleteResponse = userService.deleteUser(userDeleteRequest);
-            return new ResponseEntity<>(new ApiResponse(true, userDeleteResponse), HttpStatus.OK);
+            return new ResponseEntity<>(new ApiResponse(true, userDeleteResponse," "), HttpStatus.OK);
         }catch(Exception exception){
-            return new ResponseEntity<>(new ApiResponse(false , exception.getMessage()),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ApiResponse(false , exception.getMessage()," "),HttpStatus.BAD_REQUEST);
         }
     }
 

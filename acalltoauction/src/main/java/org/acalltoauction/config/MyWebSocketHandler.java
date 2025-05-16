@@ -14,7 +14,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
     }
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        System.out.println("Connection Established"+session.getId());
+        System.out.println("Connection Established" + session.getId());
         session.sendMessage(new TextMessage("Welcome"));
     }
     @Override
